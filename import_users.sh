@@ -184,6 +184,8 @@ function create_or_update_local_user() {
         ${USERADD_PROGRAM} ${USERADD_ARGS} "${username}"
         /bin/chown -R "${username}:${username}" "$(eval echo ~$username)"
         log "Created new user ${username}"
+        log "linking heroku .netrc"
+        /bin/ln -s /home/ec2-user/.netrc "/home/${username}/.netrc"
     fi
     /usr/sbin/usermod -a -G "${localusergroups}" "${username}"
 
