@@ -186,7 +186,6 @@ function create_or_update_local_user() {
         log "Created new user ${username}"
         log "linking heroku .netrc"
         /bin/ln -s /opt/.netrc "/home/${username}/.netrc"
-        /bin/ln -s /opt/root "/home/${username}/root"
     fi
     /usr/sbin/usermod -a -G "${localusergroups}" "${username}"
 
