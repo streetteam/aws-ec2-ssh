@@ -184,8 +184,11 @@ function create_or_update_local_user() {
         ${USERADD_PROGRAM} ${USERADD_ARGS} "${username}"
         /bin/chown -R "${username}:${username}" "$(eval echo ~$username)"
         log "Created new user ${username}"
-        log "linking heroku .netrc"
-        /bin/ln -s /opt/.netrc "/home/${username}/.netrc"
+        if [ -f /opt/.netrc ]
+        then
+          log "linking heroku .netrc"
+          /bin/ln -s /opt/.netrc "/home/${username}/.netrc"
+        fi
     fi
     /usr/sbin/usermod -a -G "${localusergroups}" "${username}"
 
